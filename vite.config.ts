@@ -22,9 +22,9 @@ export default defineConfig({
     },
   },
   server: {
-    // host: '0.0.0.0',
-    // https: true,
-    // port: 443,
+    host: '0.0.0.0',
+    https: true,
+    port: 443,
     proxy: {
       '/download': {
         target: `https://${serverIP}:${serverPort}`,
@@ -52,9 +52,9 @@ export default defineConfig({
   plugins: [
     vue(),
     // 本地开发如果需要https才能走通接口的话，则需要开启mkcert,并且开启mkcert需要sudo权限
-    // mkcert({
-    //   source: 'coding'
-    // }),
+    mkcert({
+      source: 'coding',
+    }),
     legacyPlugin({
       modernPolyfills: true,
     }),
