@@ -423,6 +423,18 @@ export class Processor {
               end_of_batch,
               lastMotionGroup,
             })
+            // 前端播放完成后回执给后端，通知可以推进下一句
+            if (end_of_batch) {
+              try {
+                fetch('/openavatarchat/ack', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({})
+                })
+              } catch (e) {
+                console.warn('ack failed', e)
+              }
+            }
           }
         }
       }

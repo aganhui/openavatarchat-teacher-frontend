@@ -47,6 +47,12 @@ export function createPeerConnection(
         // Attempt to play (needed for some browsers)
         node.play().catch((e) => console.debug('Autoplay failed:', e))
       }
+      // WebRTC 收到远端流，认为前端已看到数字人 -> 上报 ready
+      try {
+        fetch('/openavatarchat/ready', { method: 'POST' })
+      } catch (e) {
+        console.debug('ready notify failed', e)
+      }
     }
   })
 
